@@ -1,0 +1,2 @@
+# ESP-IDF_BQ2579X-
+BQ2579X component for ESP-IDF
