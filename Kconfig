@@ -1,0 +1,99 @@
+menu "BQ25798 Battery Charger Configuration"
+
+    menu "BQ25798 Battery Charger Configuration"
+        
+        menu "Default Charging Parameters"
+
+            config BQ25798_VREG_MV
+                int "Charge Voltage (mV)"
+                default 8400
+                range 3000 18800
+
+            config BQ25798_ICHG_MA
+                int "Charge Current (mA)"
+                default 1000
+                range 50 5000
+
+        endmenu
+
+        menu "Input Source Parameters"
+
+            config BQ25798_VINDPM_MV
+                int "Input Voltage Limit (mV)"
+                default 7700
+                range 3600 22000
+
+            config BQ25798_IINDPM_MA
+                int "Input Current Limit (mA)"
+                default 1410
+                range 100 3300
+
+            config BQ25798_VSYS_MIN_MV
+                int "Minimum System Voltage (mV)"
+                default 7000
+                range 2500 16000
+
+        endmenu
+
+        menu "ADC Monitoring Configuration"
+
+            config BQ25798_ADC_ENABLE
+                bool "Enable ADC readings"
+                default y
+
+            config BQ25798_ADC_VBAT
+                bool "Monitor Battery Voltage (VBAT)"
+                default y
+
+            config BQ25798_ADC_IBAT
+                bool "Monitor Battery Current (IBAT)"
+                default y
+
+            config BQ25798_ADC_VSYS
+                bool "Monitor System Voltage (VSYS)"
+                default y
+
+            config BQ25798_ADC_VBUS
+                bool "Monitor Input Voltage (VBUS)"
+                default y
+
+            config BQ25798_ADC_IBUS
+                bool "Monitor Input Current (IBUS)"
+                default y
+
+            config BQ25798_ADC_TEMP
+                bool "Monitor Die Temperature"
+                default y
+
+        endmenu
+
+    endmenu
+
+    menu "BQ25798 I2C Interface"
+        config BQ25798_I2C_ADDRESS
+            hex "I2C address of the BQ25798"
+            default 0x6B
+            help
+                BQ25798 default I2C address is 0x6B
+
+        config BQ25798_I2C_MASTER_PORT_NUM
+            int "I2C port number"
+            default 0
+            range 0 1
+            help
+                I2C port index used by the Master
+
+        config BQ25798_I2C_MASTER_FREQUENCY
+            int "I2C Clock Frequency (Hz)"
+            default 100000
+            help
+                Frequency for I2C Master operations
+
+        config BQ25798_ALERT_GPIO
+            int "INT GPIO number"
+            range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+            default 18
+            help
+                GPIO used for BQ25798 ALERT pin
+    endmenu 
+endmenu
